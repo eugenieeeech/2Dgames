@@ -1,0 +1,107 @@
+program mastermind2;
+uses CRT;
+var
+ans :array[1..4] of integer;
+input :array[1..4] of integer;
+win: Boolean;
+procedure initialize;
+begin
+win := FALSE ;
+Repeat
+randomize;
+ans[1] := random(10);
+ans[2] := random(10);
+ans[3] := random(10);
+ans[4] := random(10);
+until ((((ans[1] <> ans[2])and(ans[1]<>ans[3]))and(ans[1]<>ans[4])))and(((ans[2]<>ans[3])and ((ans[2]<>ans[4])and (ans[3] <>ans[4]))));
+end;
+
+procedure user_input;
+begin
+write('Guess the leftmost digit of the 4-digit number(0-9):');
+readln(input[1]);
+write('Guess the second digit count from the left of the 4-digit number(0-9):');
+readln(input[2]);
+write('Guess the third leftmost digit of the 4-digit number(0-9):');
+readln(input[3]);
+write('Guess the last digit of the 4-digit number(0-9):');
+readln(input[4]);
+end;
+
+procedure Check;
+var i,j,n:integer;
+vail:Boolean;
+begin
+  Vail := TRUE ;
+  if ((input[1] = ans[1]) and (input[2] = ans[2] ))then
+        begin
+        if(( input[3] = ans[3]) and(input[4] = ans[4]))
+         then  win := TRUE
+         end
+ else
+        begin
+  for i := 1 to 4 do
+        begin
+        if (input[i] >= 10) or (input[i] <-1 )  then
+                begin                                                                                {check if the input obey the rules}
+                writeln('Plase re-enter');
+                vail := FALSE;
+                 end
+         else
+                for j := 1 to 4 do
+                begin
+                        if input[i] = input[j] then begin
+                                        writeln('Plase re-enter');
+                                        vail := FALSE;
+
+end;
+
+         if vail then
+         begin
+              if input[i] = ans[i] then begin                                                               {red bullets}
+               textcolor(4);
+                write('*');
+                 textcolor(7)
+                 end;
+         end;
+      for n:= 1 to 4 do
+        begin                                                                                          {white bullets}
+                if n<>i then
+                begin
+                        if input[i] = ans[n]
+                        then begin
+                                textcolor(15);
+                                 write('*');
+                                  textcolor(7)
+                                end
+                end;
+
+        end;
+      end;
+      end;
+end;
+        end;
+
+procedure celebrate;
+var cele: integer;
+begin
+CLRSCR;
+repeat
+for cele := 1 TO 100 DO
+begin
+        textcolor(Random(15)+1);
+        write('YOUWIN!');
+        end;
+until keypressed ;
+end;
+
+begin
+
+initialize;
+repeat
+user_input;
+check;
+until win;
+celebrate;
+CLRSCR
+end.

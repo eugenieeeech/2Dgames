@@ -1,2 +1,2 @@
 # projectfile
-it is the first game i wrote
+They are the first few game i wrote
